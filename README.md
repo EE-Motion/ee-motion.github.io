@@ -32,7 +32,7 @@ The stack is a single `nginx:1.27-alpine` container that serves the repository r
 
 ## Enabling the arXiv and YouTube buttons
 
-In the header of `index.html`, replace the disabled "arXiv" or "YouTube" `<button>` with the `<a>` shown in the comment above it, using the preprint or video URL.
+Both buttons are currently hidden (`is-hidden` on their `link-block`). In the header of `index.html`, remove `is-hidden` and replace the disabled "arXiv" or "YouTube" `<button>` with the `<a>` shown in the comment above it, using the preprint or video URL.
 
 ## Regenerating the assets
 
