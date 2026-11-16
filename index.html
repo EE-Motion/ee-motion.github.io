@@ -181,10 +181,8 @@
 
   <div class="container is-max-widescreen">
     <figure class="paper-figure figure-wide">
-      <a href="static/images/figures/architecture.svg" target="_blank" rel="noopener" title="Open the vector version">
-        <img src="static/images/figures/architecture.png" width="2549" height="785"
-             alt="Architecture of EE-Motion: the browser runs the web application and the BCI library, which acquires EEG from a Muse 2 headband over Web Bluetooth and streams it over a WebSocket session to the bci-processor service; the bci-processor returns valence and arousal coordinates; the browser then sends the coordinates, the history, and k to the recommender service, where the affective adapter scores candidates with swappable WarpRec models (ACE, SASRec); the catalog service returns track metadata; the front-end service serves the web application.">
-      </a>
+      <img src="static/images/figures/architecture.png" width="2549" height="785"
+           alt="Architecture of EE-Motion: the browser runs the web application and the BCI library, which acquires EEG from a Muse 2 headband over Web Bluetooth and streams it over a WebSocket session to the bci-processor service; the bci-processor returns valence and arousal coordinates; the browser then sends the coordinates, the history, and k to the recommender service, where the affective adapter scores candidates with swappable WarpRec models (ACE, SASRec); the catalog service returns track metadata; the front-end service serves the web application.">
       <figcaption>
         <strong>Figure 1.</strong> Overview of the web-based live affective architecture. The browser acquires raw EEG
         via Web Bluetooth and streams it to the <em>bci-processor</em> for valence and arousal mapping; the <em>affective
@@ -218,7 +216,7 @@
 
       <div class="scenario-panel" id="video-bci" role="tabpanel" aria-labelledby="tab-bci">
         <div class="publication-video">
-          <video controls muted playsinline preload="metadata" poster="static/images/video-poster.jpg">
+          <video controls playsinline preload="metadata" poster="static/images/video-poster.jpg">
             <source src="static/videos/ee-motion-bci-demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
             <a href="static/videos/ee-motion-bci-demo.mp4">Download the video</a>.
@@ -232,7 +230,7 @@
       <!-- Scenario 2 panel: uncomment when static/videos/ee-motion-no-bci-demo.mp4 is available.
       <div class="scenario-panel" id="video-manual" role="tabpanel" aria-labelledby="tab-manual" hidden>
         <div class="publication-video">
-          <video controls muted playsinline preload="metadata">
+          <video controls playsinline preload="metadata">
             <source src="static/videos/ee-motion-no-bci-demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
             <a href="static/videos/ee-motion-no-bci-demo.mp4">Download the video</a>.
