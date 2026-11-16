@@ -1,0 +1,419 @@
+/* EE-Motion project page.
+   Base styles follow the Nerfies template (Google Sans titles, Noto Sans body,
+   Bulma 0.9 layout); accents reuse the service colors of the paper's figures. */
+
+:root {
+  --c-bci: #1e7b6e;      /* bci-processor (teal)   */
+  --c-rec: #c85a17;      /* recommender (orange)   */
+  --c-cat: #704ca0;      /* catalog (purple)       */
+  --c-front: #3b5ba9;    /* front-end (blue)       */
+  --c-text: #363636;
+  --c-muted: #6b6b6b;
+  --c-line: #e3e3e3;
+  --c-alt: #f5f5f5;
+  --c-link: hsl(204, 86%, 53%);
+  --radius: 10px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  color: var(--c-text);
+  background: #fff;
+}
+
+.title,
+.subtitle,
+.button,
+.tabs {
+  font-family: 'Google Sans', 'Noto Sans', sans-serif;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+code {
+  color: inherit;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+  font-size: 0.875em;
+}
+
+/* ---------- Header ---------- */
+/* Spacing follows the RUVA page: its (empty) 52 px navbar plus the 48 px hero padding
+   put the title 100 px from the top. */
+#top .hero-body {
+  padding-top: calc(3rem + 3.25rem);
+}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.125 !important;
+  text-wrap: balance;
+}
+
+/* Two lines from tablet width up; on desktop the break falls after "Architecture". */
+@media screen and (max-width: 1023px) {
+  .publication-title {
+    font-size: 2rem !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .publication-title {
+    font-size: 2.6rem !important;
+  }
+  .title-line {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1216px) {
+  .publication-title {
+    font-size: 3rem !important;
+  }
+}
+
+.title-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+  margin-top: -0.35rem;
+  border-radius: 12px;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors a {
+  color: var(--c-link) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+.affiliations {
+  margin-top: 0.4rem;
+}
+
+.affiliations .author-block:not(:last-child) {
+  margin-right: 0.5em;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.orcid-icon {
+  color: #a6ce39 !important;
+  margin-left: 2px;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.orcid-icon:hover {
+  color: #89b02d !important;
+  text-decoration: none !important;
+}
+
+.publication-links {
+  padding: 0.75rem 0;  /* the padding of the column that wraps the links on RUVA */
+}
+
+.link-block {
+  display: inline-block;
+}
+
+.link-block a,
+.link-block button {
+  margin: 5px 2px;
+}
+
+/* Inline SVG icon (Font Awesome 5 file-pdf, as on the RUVA page). */
+.svg-icon {
+  width: 0.75em;
+  height: 1em;
+}
+
+.svg-icon.is-arxiv {
+  width: 0.875em;
+}
+
+.button.is-dark[disabled] {
+  background-color: #7a7a7a;
+  border-color: transparent;
+  opacity: 0.75;
+}
+
+.soon-tag {
+  display: inline-block;
+  margin-left: 0.45em;
+  padding: 0.05em 0.5em;
+  border-radius: 999px;
+  font-size: 0.7em;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- Teaser / video ---------- */
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.teaser-claim {
+  margin-bottom: 2rem !important;
+  font-size: 1.25rem !important;
+  line-height: 1.5;
+  text-wrap: pretty;
+  color: #4a4a4a;
+}
+
+/* From tablet width up: two lines of decreasing length; the font shrinks
+   on narrow tablets so that the first line still fits. */
+@media screen and (min-width: 769px) {
+  .teaser-claim {
+    font-size: min(1.25rem, calc((100vw - 64px) / 46)) !important;
+  }
+  .claim-line {
+    display: block;
+  }
+}
+
+/* Scenario chips above the video */
+.scenario-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.scenario-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 1rem 0.4rem 0.45rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 999px;
+  background: #fff;
+  color: #363636;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.scenario-tab:hover {
+  border-color: #9a9a9a;
+}
+
+.scenario-tab.is-active {
+  border-color: var(--c-bci);
+  box-shadow: 0 0 0 1px var(--c-bci);
+}
+
+.scenario-tab.is-manual.is-active {
+  border-color: var(--c-front);
+  box-shadow: 0 0 0 1px var(--c-front);
+}
+
+.scenario-tab[aria-disabled="true"] {
+  color: #9a9a9a;
+  background: #fafafa;
+  border-color: #e3e3e3;
+  cursor: not-allowed;
+}
+
+.scenario-tab[aria-disabled="true"] .scenario-tag {
+  opacity: 0.5;
+}
+
+.scenario-tab .soon-tag {
+  margin-left: 0;
+  background: #ececec;
+  color: #7a7a7a;
+}
+
+.scenario-tab:focus-visible {
+  outline: 2px solid var(--c-link);
+  outline-offset: 2px;
+}
+
+.scenario-tag {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: var(--c-bci);
+}
+
+.scenario-tag.is-manual {
+  background: var(--c-front);
+}
+
+.scenario-tag i {
+  margin-right: 0.4em;
+  font-size: 0.95em;
+}
+
+.publication-video {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #0b0f1a;
+  aspect-ratio: 1920 / 978;  /* the recording, cropped below the app header */
+  box-shadow: 0 10px 30px rgba(10, 20, 40, 0.18);
+}
+
+.publication-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.video-caption {
+  margin-top: 0.85rem;
+  text-align: center;
+  font-style: italic;
+  font-family: 'Noto Sans', sans-serif;
+  color: var(--c-muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Sections ---------- */
+.section-alt {
+  background-color: var(--c-alt);
+}
+
+.section .title.is-4 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.content p,
+.content li {
+  line-height: 1.7;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------- Abstract ---------- */
+.abstract-text p {
+  text-wrap: pretty;
+}
+
+.abstract-text p:not(:last-child) {
+  margin-bottom: 1.15em;
+}
+
+/* ---------- Figures ---------- */
+.paper-figure {
+  margin: 1.5rem auto 2rem;
+}
+
+.paper-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.paper-figure figcaption {
+  margin: 0.85rem auto 0;
+  max-width: 820px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #4a4a4a;
+  text-align: center;
+}
+
+.figure-wide {
+  padding: 0 1rem;
+}
+
+/* Figure 1 caption: two balanced lines on desktop. */
+.figure-wide figcaption {
+  max-width: 1000px;
+  text-wrap: balance;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1215px) {
+  .figure-wide figcaption {
+    font-size: 0.85rem;
+  }
+}
+
+/* ---------- Citation ---------- */
+.bibtex-wrap {
+  position: relative;
+}
+
+.bibtex-wrap pre {
+  padding: 1.1rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+}
+
+/* ---------- Footer ---------- */
+.footer-small {
+  font-size: 0.9rem;
+}
+
+.footer-credit {
+  font-size: 0.82rem;
+  margin-top: 1rem;
+  color: var(--c-muted);
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 768px) {
+  .title-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .teaser-claim {
+    font-size: 1.1rem !important;
+  }
+  .teaser .hero-body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .scenario-tab {
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

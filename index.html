@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EE-Motion: An EEG-based Web Architecture for Live Affective Music Recommendation</title>
+  <meta name="description"
+        content="EE-Motion pairs a consumer EEG headband with the browser over Web Bluetooth, maps live EEG to valence-arousal proxy coordinates, and uses them to steer music recommendations for anonymous visitors without model retraining.">
+  <meta name="keywords" content="EE-Motion, affective recommendation, music recommendation, EEG, brain-computer interface, Web Bluetooth, valence, arousal, WarpRec, ACE, SASRec">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EE-Motion: An EEG-based Web Architecture for Live Affective Music Recommendation">
+  <meta property="og:description" content="A web platform that turns in-browser EEG into live valence-arousal context for music recommendation, with swappable inputs and models.">
+  <meta property="og:url" content="https://ee-motion.github.io/">
+  <meta property="og:image" content="https://ee-motion.github.io/static/images/figures/architecture.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="icon" href="static/images/icon.svg" type="image/svg+xml">
+
+  <script defer src="static/js/index.js"></script>
+</head>
+<body>
+
+<!-- ======================= Header ======================= -->
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <img class="title-icon" src="static/images/icon.svg" alt="" width="56" height="56">
+            EE-Motion: An EEG-based Web Architecture <span class="title-line">for Live Affective Music Recommendation</span>
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://sisinflab.poliba.it/people/sabino-roccotelli" target="_blank" rel="noopener">Sabino Roccotelli</a><sup>1</sup>
+              <a href="https://orcid.org/0009-0003-3479-9607" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Sabino Roccotelli"><i class="fab fa-orcid"></i></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://sisinflab.poliba.it/people/potito-aghilar" target="_blank" rel="noopener">Potito Aghilar</a><sup>1</sup>
+              <a href="https://orcid.org/0000-0003-3662-0802" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Potito Aghilar"><i class="fab fa-orcid"></i></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://sisinflab.poliba.it/people/vito-walter-anelli" target="_blank" rel="noopener">Vito Walter Anelli</a><sup>1</sup>
+              <a href="https://orcid.org/0000-0002-5567-4307" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Vito Walter Anelli"><i class="fab fa-orcid"></i></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://abellogin.github.io/" target="_blank" rel="noopener">Alejandro Bellogín</a><sup>2</sup>
+              <a href="https://orcid.org/0000-0001-6368-2510" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Alejandro Bellogín"><i class="fab fa-orcid"></i></a>,
+            </span>
+            <br class="is-hidden-touch">
+            <span class="author-block">
+              <a href="https://sisinflab.poliba.it/people/tommaso-colafiglio" target="_blank" rel="noopener">Tommaso Colafiglio</a><sup>1</sup>
+              <a href="https://orcid.org/0000-0001-7184-310X" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Tommaso Colafiglio"><i class="fab fa-orcid"></i></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.wideverse.com/about/#management" target="_blank" rel="noopener">Michelantonio Trizio</a><sup>3</sup>
+              <a href="https://orcid.org/0009-0005-5363-2647" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Michelantonio Trizio"><i class="fab fa-orcid"></i></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://sisinflab.poliba.it/people/tommaso-di-noia" target="_blank" rel="noopener">Tommaso Di Noia</a><sup>1</sup>
+              <a href="https://orcid.org/0000-0002-0939-5462" target="_blank" rel="noopener" class="orcid-icon" aria-label="ORCID of Tommaso Di Noia"><i class="fab fa-orcid"></i></a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors affiliations">
+            <span class="author-block"><sup>1</sup>Politecnico di Bari, Italy;</span>
+            <span class="author-block"><sup>2</sup>Universidad Autónoma de Madrid, Spain;</span>
+            <span class="author-block"><sup>3</sup>Wideverse, Italy</span>
+          </div>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="static/paper/EE-Motion_paper.pdf" download="EE-Motion_paper.pdf"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><svg class="svg-icon" viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <!-- arXiv icon from Academicons 1.9.4 (SIL OFL 1.1), as on the RUVA page.
+                   Available soon: replace this <button> with
+                   <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" rel="noopener"
+                      class="external-link button is-normal is-rounded is-dark">...</a> -->
+              <button class="button is-normal is-rounded is-dark" disabled
+                      title="The arXiv preprint will be available soon">
+                <span class="icon"><svg class="svg-icon is-arxiv" viewBox="0 0 448 512" aria-hidden="true"><g transform="matrix(1.5499998,0,0,-1.5499998,-123.19936,553.59966)"><path fill="currentColor" d="m 119.65,351.996 c -5.84961,0.13477 -11.1943,-3.29883 -13.502,-8.67578 -2.19629,-5.27051 -0.61914,-8.9668 4.19727,-15.8652 7.05469,-10.3799 78.8242,-96.5625 78.8242,-96.5625 l -15.8828,-14.8633 c -13.3809,-13.3779 -13.9561,-31.333 -1.50977,-43.7754 l 18.4922,-17.6133 -51.5977,-63.377 c -4.00586,-4.26758 -6.48535,-11.7559 -4.24805,-17.1309 2.27832,-5.53613 7.69727,-9.12891 13.6836,-9.07031 3.83398,0.0957 7.43262,1.87402 9.83789,4.86133 l 61.3691,57.0566 94.5762,-90.0703 c 3.19434,-3.08398 7.44336,-4.83984 11.8828,-4.91016 1.60449,0.0039 3.19824,0.245117 4.73242,0.714844 5.7793,1.80566 10.249,6.41797 11.8711,12.252 1.2998,5.47363 -0.27637,11.2334 -4.18164,15.2832 l -83.0859,100.011996 14.8789,13.834 c 11.0957,10.0029 11.1543,27.3906 0.12695,37.4688 l -16.2949,15.6309 56.2559,66.4434 0.0742,0.0859 0.0664,0.0899 c 5.02734,6.53125 7.43164,11.5615 4.83984,17.9395 -3.13379,5.96875 -8.69727,10.29 -15.2559,11.8516 -0.67676,0.0908 -1.35938,0.13574 -2.04297,0.13671 l -0.004,-0.0117 c -4.42871,-0.27051 -8.61035,-2.13086 -11.7754,-5.24023 l -0.13086,-0.10743 -0.12304,-0.11132 -65.207,-59.127 -89.8965,86.2402 c 0,0 -5.33398,6.47754 -10.9707,6.61133 z m 178.104,-33.041 c 0.47852,-0.002 0.95703,-0.0332 1.43164,-0.0957 4.84277,-1.33301 8.95605,-4.54004 11.4316,-8.91016 1.44922,-3.5625 1.00293,-6.45703 -4.19727,-13.2148 l -56.0586,-66.2188 -26.375,25.3027 64.9551,58.9062 c 2.33887,2.41504 5.46484,3.91113 8.8125,4.2168 v 0.0137 z M 192.436,227.402 334.446,57.244 c 2.78711,-3.48926 4.5293,-6.97949 3.3418,-10.9121 -1.16113,-4.30273 -4.43457,-7.71777 -8.68555,-9.05664 -1.08105,-0.333984 -2.20508,-0.503906 -3.33594,-0.505859 -3.20801,0.07617 -6.26953,1.35645 -8.57617,3.58789 l -142.033,135.284999 c -11.1719,11.1719 -9.48242,26.0195 1.39258,36.8945 z"/></g></svg></span>
+                <span>arXiv</span>
+                <span class="soon-tag">soon</span>
+              </button>
+            </span>
+            <span class="link-block">
+              <a href="https://sisinf05.poliba.it/ace-demo/" target="_blank" rel="noopener"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-laptop"></i></span>
+                <span>Live Demo</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#video" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-video"></i></span>
+                <span>Video</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <!-- Available soon: replace this <button> with
+                   <a href="https://youtu.be/VIDEO_ID" target="_blank" rel="noopener"
+                      class="external-link button is-normal is-rounded is-dark">...</a> -->
+              <button class="button is-normal is-rounded is-dark" disabled
+                      title="The YouTube video will be available soon">
+                <span class="icon"><i class="fab fa-youtube"></i></span>
+                <span>YouTube</span>
+                <span class="soon-tag">soon</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================= Teaser ======================= -->
+<section class="hero teaser" id="teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered teaser-claim">
+        <span class="claim-line"><strong>EE-Motion</strong> maps in-browser EEG from a consumer headband to <span class="nowrap">valence&ndash;arousal</span> proxy coordinates</span>
+        <span class="claim-line">and uses them to steer music recommendations for anonymous visitors without model retraining.</span>
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================= Abstract ======================= -->
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified abstract-text">
+          <p>
+            Music listening is intrinsically tied to emotion, which drifts continuously within a single session.
+            Although modern browsers interface with wearable brain-computer interfaces, recommendation systems
+            remain structured around discrete logs and lack the infrastructure to integrate continuous
+            physiological signals. Furthermore, existing affect-aware models rely on static user profiles and
+            offline training, failing to serve anonymous newcomers without model retraining.
+          </p>
+          <p>
+            We present a web platform that resolves both challenges. Pairing with a consumer
+            electro&shy;encephalogram (EEG) headband over Web Bluetooth, the system captures live EEG, mapping
+            frontal alpha asymmetry and arousal index to normalized valence-arousal proxy coordinates on
+            Russell's circumplex plane.
+          </p>
+          <p>
+            Driven by these coordinates, an affective adapter unifies structurally diverse recommendation
+            backbones under a shared live scoring mechanism. By parameterizing anonymous visitors through a few
+            favorite tracks, the module recommends tracks conditioned on live proxy coordinates. This
+            demonstrates that real-time EEG-derived control signals can steer recommendations without persistent
+            user tables or model retraining.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================= Architecture ======================= -->
+<section class="section" id="architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">System Architecture</h2>
+  </div>
+
+  <div class="container is-max-widescreen">
+    <figure class="paper-figure figure-wide">
+      <a href="static/images/figures/architecture.svg" target="_blank" rel="noopener" title="Open the vector version">
+        <img src="static/images/figures/architecture.png" width="2549" height="785"
+             alt="Architecture of EE-Motion: the browser runs the web application and the BCI library, which acquires EEG from a Muse 2 headband over Web Bluetooth and streams it over a WebSocket session to the bci-processor service; the bci-processor returns valence and arousal coordinates; the browser then sends the coordinates, the history, and k to the recommender service, where the affective adapter scores candidates with swappable WarpRec models (ACE, SASRec); the catalog service returns track metadata; the front-end service serves the web application.">
+      </a>
+      <figcaption>
+        <strong>Figure 1.</strong> Overview of the web-based live affective architecture. The browser acquires raw EEG
+        via Web Bluetooth and streams it to the <em>bci-processor</em> for valence and arousal mapping; the <em>affective
+        adapter</em> then scores candidates across swappable WarpRec backbones.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<!-- ======================= Official demo video ======================= -->
+<section class="section section-alt" id="video">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column">
+      <h2 class="title is-3 has-text-centered">Official Demo Video</h2>
+
+      <div class="scenario-tabs" role="tablist" aria-label="Demo scenarios">
+        <button class="scenario-tab is-active" role="tab" aria-selected="true" aria-controls="video-bci" id="tab-bci">
+          <span class="scenario-tag"><i class="fas fa-brain" aria-hidden="true"></i>Scenario 1</span>
+          <span>Interactive BCI walkthrough</span>
+        </button>
+        <!-- Available soon: when the panel below is enabled, remove aria-disabled and add aria-controls="video-manual". -->
+        <button class="scenario-tab is-manual" role="tab" aria-selected="false" aria-disabled="true" id="tab-manual"
+                title="The video of this scenario will be available soon">
+          <span class="scenario-tag is-manual"><i class="fas fa-arrow-pointer" aria-hidden="true"></i>Scenario 2</span>
+          <span>Hardware-free exploration</span>
+          <span class="soon-tag">soon</span>
+        </button>
+      </div>
+
+      <div class="scenario-panel" id="video-bci" role="tabpanel" aria-labelledby="tab-bci">
+        <div class="publication-video">
+          <video controls muted playsinline preload="metadata" poster="static/images/video-poster.jpg">
+            <source src="static/videos/ee-motion-bci-demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+            <a href="static/videos/ee-motion-bci-demo.mp4">Download the video</a>.
+          </video>
+        </div>
+        <p class="video-caption">
+          Live affective music recommendation driven by in-browser EEG from a consumer headband.
+        </p>
+      </div>
+
+      <!-- Scenario 2 panel: uncomment when static/videos/ee-motion-no-bci-demo.mp4 is available.
+      <div class="scenario-panel" id="video-manual" role="tabpanel" aria-labelledby="tab-manual" hidden>
+        <div class="publication-video">
+          <video controls muted playsinline preload="metadata">
+            <source src="static/videos/ee-motion-no-bci-demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+            <a href="static/videos/ee-motion-no-bci-demo.mp4">Download the video</a>.
+          </video>
+        </div>
+        <p class="video-caption">
+          Live affective music recommendation driven by manually set valence&ndash;arousal coordinates.
+        </p>
+      </div>
+      -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================= Citation ======================= -->
+<section class="section" id="citation">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <div class="bibtex-wrap">
+      <button class="button is-small is-light copy-btn" data-copy="bibtex" aria-label="Copy BibTeX to clipboard">
+        <span class="icon is-small"><i class="far fa-copy"></i></span><span class="copy-label">Copy</span>
+      </button>
+      <pre><code id="bibtex">@misc{roccotelli2026eemotion,
+  title  = {{EE-Motion}: An {EEG}-based Web Architecture for Live Affective
+            Music Recommendation},
+  author = {Roccotelli, Sabino and Aghilar, Potito and Anelli, Vito Walter and
+            Bellog{\'i}n, Alejandro and Colafiglio, Tommaso and
+            Trizio, Michelantonio and Di Noia, Tommaso},
+  year   = {2026},
+  note   = {Demo paper under review at The ACM Web Conference 2027 (WWW '27)},
+  url    = {https://ee-motion.github.io/}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            <strong>EE-Motion</strong> &ndash; An EEG-based Web Architecture for Live Affective Music Recommendation
+          </p>
+          <p class="footer-small">The ACM Web Conference 2027 &middot; Demonstrations Track (under review)</p>
+          <p class="footer-credit">
+            This website is adapted from the <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+            template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
