@@ -205,18 +205,15 @@
           <span class="scenario-tag"><i class="fas fa-brain" aria-hidden="true"></i>Scenario 1</span>
           <span>Interactive BCI walkthrough</span>
         </button>
-        <!-- Available soon: when the panel below is enabled, remove aria-disabled and add aria-controls="video-manual". -->
-        <button class="scenario-tab is-manual" role="tab" aria-selected="false" aria-disabled="true" id="tab-manual"
-                title="The video of this scenario will be available soon">
+        <button class="scenario-tab is-manual" role="tab" aria-selected="false" aria-controls="video-manual" id="tab-manual">
           <span class="scenario-tag is-manual"><i class="fas fa-arrow-pointer" aria-hidden="true"></i>Scenario 2</span>
           <span>Hardware-free exploration</span>
-          <span class="soon-tag">soon</span>
         </button>
       </div>
 
       <div class="scenario-panel" id="video-bci" role="tabpanel" aria-labelledby="tab-bci">
         <div class="publication-video">
-          <video controls playsinline preload="metadata" poster="static/images/video-poster.jpg">
+          <video controls playsinline preload="metadata" poster="static/images/video-poster-bci.jpg">
             <source src="static/videos/ee-motion-bci-demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
             <a href="static/videos/ee-motion-bci-demo.mp4">Download the video</a>.
@@ -227,10 +224,9 @@
         </p>
       </div>
 
-      <!-- Scenario 2 panel: uncomment when static/videos/ee-motion-no-bci-demo.mp4 is available.
       <div class="scenario-panel" id="video-manual" role="tabpanel" aria-labelledby="tab-manual" hidden>
         <div class="publication-video">
-          <video controls playsinline preload="metadata">
+          <video controls playsinline preload="metadata" poster="static/images/video-poster-no-bci.jpg">
             <source src="static/videos/ee-motion-no-bci-demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
             <a href="static/videos/ee-motion-no-bci-demo.mp4">Download the video</a>.
@@ -240,7 +236,6 @@
           Live affective music recommendation driven by manually set valence&ndash;arousal coordinates.
         </p>
       </div>
-      -->
       </div>
     </div>
   </div>

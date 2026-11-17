@@ -25,11 +25,6 @@ The stack is a single `nginx:1.27-alpine` container that serves the repository r
 | `static/videos/` | Demo videos |
 | `docker-compose.yml`, `docker/nginx.conf` | Local preview only |
 
-## Enabling the video without BCI
-
-1. Encode the video as below and save it as `static/videos/ee-motion-no-bci-demo.mp4`.
-2. In the video section of `index.html` (`#video`), uncomment the Scenario 2 panel and, on the "Scenario 2" chip (`#tab-manual`), remove `aria-disabled` and the "soon" tag and add `aria-controls="video-manual"`. If the new video is not 1920 x 978, adjust `aspect-ratio` of `.publication-video` in `static/css/index.css`. The header "Video" button already points to this section.
-
 ## Enabling the arXiv and YouTube buttons
 
 Both buttons are currently hidden (`is-hidden` on their `link-block`). In the header of `index.html`, remove `is-hidden` and replace the disabled "arXiv" or "YouTube" `<button>` with the `<a>` shown in the comment above it, using the preprint or video URL.
@@ -46,12 +41,14 @@ docker run --rm -v "$PWD/$PAPER":/src:ro -v /tmp/out:/out -w /src -e BIBINPUTS=/
        texlive/texlive:latest latexmk -pdf -interaction=nonstopmode -outdir=/out main.tex
 cp /tmp/out/main.pdf static/paper/EE-Motion_paper.pdf
 
-# Videos: GitHub rejects files over 100 MB. H.264 at 30 fps, CRF 26, faststart for streaming.
-# The crop removes the app header (black band and old app title, top 102 px): 1920 x 978.
-ffmpeg -i ../ee-motion-bci-demo.mp4 -vf crop=1920:978:0:102 -c:v libx264 -preset slow -crf 26 -r 30 -pix_fmt yuv420p \
-       -c:a aac -b:a 128k -movflags +faststart static/videos/ee-motion-bci-demo.mp4
-ffmpeg -ss 120 -i static/videos/ee-motion-bci-demo.mp4 -frames:v 1 -vf scale=1600:-2 -q:v 3 \
-       static/images/video-poster.jpg
+# Videos (Scenario 1: bci, Scenario 2: no-bci): GitHub rejects files over 100 MB.
+# H.264 at 30 fps, CRF 26, faststart for streaming; 1920 x 1080, as recorded.
+for v in bci no-bci; do
+  ffmpeg -i ../ee-motion-$v-demo.mp4 -c:v libx264 -preset slow -crf 26 -r 30 -pix_fmt yuv420p \
+         -c:a aac -b:a 128k -movflags +faststart static/videos/ee-motion-$v-demo.mp4
+  ffmpeg -ss 120 -i static/videos/ee-motion-$v-demo.mp4 -frames:v 1 -vf scale=1600:-2 -q:v 3 \
+         static/images/video-poster-$v.jpg
+done
 
 # Figure 1
 pdftocairo -svg $PAPER/images/architecture/architecture.pdf static/images/figures/architecture.svg
