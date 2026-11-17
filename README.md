@@ -21,13 +21,13 @@ The stack is a single `nginx:1.27-alpine` container that serves the repository r
 | `static/css/fontawesome.all.min.css`, `static/webfonts/` | Font Awesome Free 6.5.2 |
 | `static/images/figures/` | Figure 1 of the paper (architecture, PNG and SVG) |
 | `static/images/journey/` | Screenshots of Figures 2 and 3, cropped as in the paper (for the Demonstration section, currently not on the page) |
-| `static/paper/EE-Motion_paper.pdf` | The paper, as submitted (acmart `review` option) |
+| `static/paper/EE-Motion_paper.pdf` | The paper, public version (no line numbers) |
 | `static/videos/` | Demo videos |
 | `docker-compose.yml`, `docker/nginx.conf` | Local preview only |
 
-## Enabling the arXiv and YouTube buttons
+## Enabling the YouTube button
 
-Both buttons are currently hidden (`is-hidden` on their `link-block`). In the header of `index.html`, remove `is-hidden` and replace the disabled "arXiv" or "YouTube" `<button>` with the `<a>` shown in the comment above it, using the preprint or video URL.
+The button is currently hidden (`is-hidden` on its `link-block`). In the header of `index.html`, remove `is-hidden` and replace the disabled "YouTube" `<button>` with the `<a>` shown in the comment above it, using the video URL.
 
 ## Regenerating the assets
 
