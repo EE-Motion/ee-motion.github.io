@@ -25,9 +25,9 @@ The stack is a single `nginx:1.27-alpine` container that serves the repository r
 | `static/videos/` | Demo videos |
 | `docker-compose.yml`, `docker/nginx.conf` | Local preview only |
 
-## Enabling the YouTube button
+## YouTube links
 
-The button is currently hidden (`is-hidden` on its `link-block`). In the header of `index.html`, remove `is-hidden` and replace the disabled "YouTube" `<button>` with the `<a>` shown in the comment above it, using the video URL.
+The "YouTube" button in the header opens a menu with one link per scenario (`#yt-menu` in `index.html`): Scenario 1 (with BCI) and Scenario 2 (without BCI).
 
 ## Regenerating the assets
 

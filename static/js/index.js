@@ -1,5 +1,5 @@
 // EE-Motion project page: walkthrough viewer (Figure 2, for the Demonstration section,
-// currently not on the page), scenario chips of the video, BibTeX copy.
+// currently not on the page), scenario chips of the video, YouTube menu, BibTeX copy.
 document.addEventListener('DOMContentLoaded', () => {
   // Walkthrough viewer: step chips, previous/next buttons, arrow keys.
   const journey = document.getElementById('journey');
@@ -40,6 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }));
+  });
+
+  // YouTube menu in the header: toggle on click, close on outside click, Escape or choice.
+  document.querySelectorAll('.yt-dropdown').forEach((dd) => {
+    const toggle = dd.querySelector('.yt-toggle');
+    const menu = dd.querySelector('.yt-menu');
+    const setOpen = (open) => {
+      if (open) {
+        // Keep the menu, centered under the button, at least 16 px inside the viewport.
+        const b = dd.getBoundingClientRect();
+        const left = b.left + b.width / 2 - menu.offsetWidth / 2;
+        const right = left + menu.offsetWidth;
+        const dx = Math.max(16 - left, 0) - Math.max(right - (document.documentElement.clientWidth - 16), 0);
+        menu.style.setProperty('--dx', `${dx}px`);
+      }
+      dd.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setOpen(!dd.classList.contains('is-open')));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', (e) => { if (!dd.contains(e.target)) setOpen(false); });
+    dd.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dd.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
+    });
   });
 
   // Copy BibTeX.

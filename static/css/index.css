@@ -166,6 +166,83 @@ code {
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* YouTube menu: one link per scenario, in the dark style of the header buttons. */
+.yt-dropdown {
+  position: relative;
+}
+
+.yt-caret i {
+  font-size: 0.7em;
+  transition: transform 0.15s;
+}
+
+.yt-dropdown.is-open .yt-caret i {
+  transform: rotate(180deg);
+}
+
+.yt-menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  z-index: 20;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.35rem;
+  text-align: left;
+  background: #363636;  /* Bulma is-dark, as the buttons */
+  border-radius: 1.4rem;
+  box-shadow: 0 10px 24px rgba(10, 10, 10, 0.18);
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(calc(-50% + var(--dx, 0px)), -4px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0s 0.15s;
+}
+
+.yt-dropdown.is-open .yt-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(calc(-50% + var(--dx, 0px)), 0);
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.link-block .yt-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.45rem 1rem 0.45rem 0.75rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.link-block .yt-item:hover,
+.link-block .yt-item:focus-visible {
+  background: #4a4a4a;
+  color: #fff;
+}
+
+.yt-item:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: -2px;
+}
+
+.yt-item .icon {
+  flex-shrink: 0;
+}
+
+.yt-ext {
+  margin-left: auto;
+  padding-left: 0.75rem;
+  font-size: 0.75em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
 /* ---------- Teaser / video ---------- */
 .teaser .hero-body {
   padding-top: 0;
@@ -407,13 +484,28 @@ code {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  .scenario-tab {
+  .scenario-tab,
+  .link-block .yt-item {
     font-size: 0.95rem;
+  }
+  /* Phones: the menu fits within the 16 px gutters; labels wrap only if they must. */
+  .yt-menu {
+    max-width: calc(100vw - 32px);
+  }
+  .link-block .yt-item {
+    white-space: normal;
+  }
+  .yt-ext {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .yt-menu,
+  .yt-caret i {
+    transition: none !important;
   }
 }

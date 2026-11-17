@@ -103,16 +103,26 @@
                 <span>Video</span>
               </a>
             </span>
-            <span class="link-block is-hidden">  <!-- hidden until the YouTube link is available -->
-              <!-- Available soon: replace this <button> with
-                   <a href="https://youtu.be/VIDEO_ID" target="_blank" rel="noopener"
-                      class="external-link button is-normal is-rounded is-dark">...</a> -->
-              <button class="button is-normal is-rounded is-dark" disabled
-                      title="The YouTube video will be available soon">
-                <span class="icon"><i class="fab fa-youtube"></i></span>
+            <!-- YouTube: one button, a menu with one link per scenario (as the chips of the video section). -->
+            <span class="link-block yt-dropdown">
+              <button class="button is-normal is-rounded is-dark yt-toggle" type="button"
+                      aria-expanded="false" aria-controls="yt-menu">
+                <span class="icon"><i class="fab fa-youtube" aria-hidden="true"></i></span>
                 <span>YouTube</span>
-                <span class="soon-tag">soon</span>
+                <span class="icon is-small yt-caret"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
               </button>
+              <span class="yt-menu" id="yt-menu">
+                <a class="yt-item" href="https://youtu.be/gbQLSfRK7zw" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fas fa-brain" aria-hidden="true"></i></span>
+                  <span>Interactive BCI walkthrough</span>
+                  <i class="fas fa-arrow-up-right-from-square yt-ext" aria-hidden="true"></i>
+                </a>
+                <a class="yt-item" href="https://youtu.be/tMGslJlbCzU" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fas fa-arrow-pointer" aria-hidden="true"></i></span>
+                  <span>Hardware-free exploration</span>
+                  <i class="fas fa-arrow-up-right-from-square yt-ext" aria-hidden="true"></i>
+                </a>
+              </span>
             </span>
           </div>
         </div>
